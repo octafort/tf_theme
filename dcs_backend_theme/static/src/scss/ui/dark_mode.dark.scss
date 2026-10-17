@@ -1,0 +1,61 @@
+// =============================================================================
+// Dark mode refinements
+// -----------------------------------------------------------------------------
+// The dark bundle already recompiles all Cortex and theme styles with the dark
+// variables (primary_variables.dark.scss). This file only adjusts details
+// that rely on literal colors rather than variables.
+// =============================================================================
+
+:root {
+    // Primary needs a lighter tone for readable text on dark surfaces.
+    --cbt-primary-text: color-mix(in srgb, var(--cbt-primary) 62%, #ffffff);
+    --cbt-primary-soft: color-mix(in srgb, var(--cbt-primary) 22%, var(--cbt-surface));
+    --cbt-primary-softer: color-mix(in srgb, var(--cbt-primary) 11%, var(--cbt-surface));
+    --cbt-primary-hover: color-mix(in srgb, var(--cbt-primary) 85%, #ffffff);
+    --cbt-primary-active: color-mix(in srgb, var(--cbt-primary) 72%, #ffffff);
+}
+
+// $o-white is a dark color in this bundle; literal "white text" utilities
+// must stay white.
+.text-white { color: #ffffff !important; }
+.text-bg-dark { background-color: #2b313e !important; color: #f3f5fa !important; }
+.bg-white { background-color: var(--cbt-surface) !important; }
+.bg-light { background-color: var(--cbt-surface-raised) !important; }
+
+// Images and logos designed for white backgrounds get a subtle plate.
+.o_field_image img[src*="/web/image/res.company"],
+.o_kanban_record .o_kanban_image img {
+    background-color: rgba(255, 255, 255, .92);
+    border-radius: var(--cbt-radius-sm);
+}
+
+// Cortex's default app icons are colorful PNGs: avoid harsh edges.
+.cbt-app-icon img { filter: saturate(.95) brightness(.98); }
+
+// Inputs: a faint fill helps locate fields on dark sheets.
+.o_form_view .o_field_widget:not(.o_readonly_modifier) .o_input:not(:focus) {
+    background-color: rgba(255, 255, 255, .02);
+}
+
+// Code / HTML fields keep readable contrast
+.o_field_html .note-editable, .cortex-editor-editable {
+    color: var(--cbt-text);
+}
+
+// Calendar: FullCalendar ships light overlay colors as CSS variables.
+.o_calendar_renderer {
+    --fc-non-business-color: rgba(0, 0, 0, .28);
+    --fc-neutral-bg-color: var(--cbt-surface-raised);
+    --fc-page-bg-color: var(--cbt-surface);
+    --fc-border-color: var(--cbt-border);
+    --fc-highlight-color: rgba(var(--cbt-primary-rgb), .18);
+    .fc-theme-standard td, .fc-theme-standard th {
+        border-color: var(--cbt-border);
+    }
+}
+
+// Flat app icons: keep monochrome glyphs legible on dark tiles.
+:root[data-cbt-icons="flat"] .cbt-app-icon img {
+    mix-blend-mode: normal;
+    filter: grayscale(1) brightness(1.7);
+}
