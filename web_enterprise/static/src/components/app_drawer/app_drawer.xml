@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="web_enterprise.AppDrawer">
+        <div class="cbt-overlay cbt-drawer-overlay" t-att-class="{ 'cbt-drawer-overlay--full': prefs.cbt_nav_mode === 'drawer' }"
+             t-on-click.self="close">
+            <div class="cbt-drawer" t-attf-class="cbt-drawer--{{ isSearching ? 'search' : prefs.cbt_drawer_style }}"
+                 t-ref="root" role="dialog" aria-modal="true" t-att-aria-label="labels.title"
+                 t-on-keydown="onKeydown">
+
+                <div class="cbt-drawer__top">
+                    <div class="cbt-drawer__search">
+                        <i class="fa fa-search" aria-hidden="true"/>
+                        <input type="search" data-autofocus="1" class="cbt-drawer__input"
+                               t-att-placeholder="labels.search" t-att-aria-label="labels.search"
+                               t-model="state.query" t-on-input="onInput"
+                               autocomplete="off" spellcheck="false"/>
+                    </div>
+                    <div class="cbt-drawer__layout btn-group" role="group" t-att-aria-label="labels.layout" t-if="!isSearching">
+                        <t t-foreach="[['grid', 'fa-th-large', labels.grid], ['categories', 'fa-th-list', labels.categories], ['list', 'fa-list', labels.list]]" t-as="opt" t-key="opt[0]">
+                            <button type="button" class="cbt-icon-btn" t-att-title="opt[2]" t-att-aria-label="opt[2]"
+                                    t-att-aria-pressed="prefs.cbt_drawer_style === opt[0] ? 'true' : 'false'"
+                                    t-on-click="() => this.setStyle(opt[0])">
+                                <i t-attf-class="fa {{ opt[1] }}" aria-hidden="true"/>
+                            </button>
+                        </t>
+                    </div>
+                    <button type="button" class="cbt-icon-btn" t-att-aria-label="labels.close" t-att-title="labels.close" t-on-click="close">
+                        <i class="oi oi-close" aria-hidden="true"/>
+                    </button>
+                </div>
+
+                <div class="cbt-drawer__body">
+                    <!-- Search results -->
+                    <t t-if="isSearching">
+                        <section class="cbt-drawer__section" t-if="matchingApps.length">
+                            <div class="cbt-drawer__grid">
+                                <t t-foreach="matchingApps" t-as="app" t-key="'s_' + app.id">
+                                    <t t-call="web_enterprise.AppDrawerTile">
+                                        <t t-set="tileIndex" t-value="app_index"/>
+                                    </t>
+                                </t>
+                            </div>
+                        </section>
+                        <section class="cbt-drawer__section" t-if="matchingMenus.length">
+                            <h2 class="cbt-drawer__heading" t-esc="labels.menus"/>
+                            <ul class="cbt-drawer__menus">
+                                <li t-foreach="matchingMenus" t-as="entry" t-key="entry.key">
+                                    <a class="cbt-drawer__menu" t-att-href="nav.getHref(entry.menu)" t-on-click="(ev) => this.openEntry(entry, ev)">
+                                        <AppIcon app="entry.app" size="'sm'"/>
+                                        <span class="cbt-drawer__menu-name" t-esc="entry.name"/>
+                                        <span class="cbt-drawer__menu-path" t-esc="entry.path.join(' / ')"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                        <p class="cbt-drawer__empty" t-if="!matchingApps.length and !matchingMenus.length" t-esc="labels.empty"/>
+                    </t>
+
+                    <t t-else="">
+                        <section class="cbt-drawer__section cbt-drawer__section--quick" t-if="favoriteApps.length or recentApps.length">
+                            <div class="cbt-drawer__quick" t-if="favoriteApps.length">
+                                <h2 class="cbt-drawer__heading"><i class="fa fa-star me-1" aria-hidden="true"/><t t-esc="labels.favorites"/></h2>
+                                <div class="cbt-drawer__chips">
+                                    <a t-foreach="favoriteApps" t-as="app" t-key="'f_' + app.id" class="cbt-drawer__chip"
+                                       t-att-href="nav.getHref(app)" t-on-click="(ev) => this.openApp(app, ev)">
+                                        <AppIcon app="app" size="'sm'"/><span t-esc="app.name"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="cbt-drawer__quick" t-if="recentApps.length">
+                                <h2 class="cbt-drawer__heading"><i class="fa fa-clock-o me-1" aria-hidden="true"/><t t-esc="labels.recent"/></h2>
+                                <div class="cbt-drawer__chips">
+                                    <a t-foreach="recentApps" t-as="app" t-key="'r_' + app.id" class="cbt-drawer__chip"
+                                       t-att-href="nav.getHref(app)" t-on-click="(ev) => this.openApp(app, ev)">
+                                        <AppIcon app="app" size="'sm'"/><span t-esc="app.name"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <t t-if="prefs.cbt_drawer_style === 'categories'">
+                            <section class="cbt-drawer__section" t-foreach="categories" t-as="group" t-key="group.id">
+                                <h2 class="cbt-drawer__heading" t-esc="group.label"/>
+                                <div class="cbt-drawer__grid">
+                                    <t t-foreach="group.apps" t-as="app" t-key="'c_' + app.id">
+                                        <t t-call="web_enterprise.AppDrawerTile">
+                                            <t t-set="tileIndex" t-value="indexOf(app)"/>
+                                        </t>
+                                    </t>
+                                </div>
+                            </section>
+                        </t>
+                        <section t-else="" class="cbt-drawer__section">
+                            <h2 class="cbt-drawer__heading" t-esc="labels.all"/>
+                            <div class="cbt-drawer__grid">
+                                <t t-foreach="apps" t-as="app" t-key="'a_' + app.id">
+                                    <t t-call="web_enterprise.AppDrawerTile">
+                                        <t t-set="tileIndex" t-value="app_index"/>
+                                    </t>
+                                </t>
+                            </div>
+                        </section>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="web_enterprise.AppDrawerTile">
+        <div class="cbt-drawer__tile" t-att-data-cbt-drawer-index="tileIndex"
+             t-att-class="{ 'cbt-drawer__tile--active': isActive(app), 'cbt-drawer__tile--current': currentApp and currentApp.id === app.id }">
+            <a class="cbt-drawer__tile-link" t-att-href="nav.getHref(app)" t-att-data-menu-xmlid="app.xmlid"
+               t-on-click="(ev) => this.openApp(app, ev)" t-on-focus="() => this.setActive(tileIndex)">
+                <AppIcon app="app" size="'lg'"/>
+                <span class="cbt-drawer__tile-name" t-esc="app.name"/>
+            </a>
+            <button type="button" class="cbt-drawer__fav"
+                    t-att-class="{ 'cbt-drawer__fav--on': isFavorite(app) }"
+                    t-att-aria-pressed="isFavorite(app) ? 'true' : 'false'"
+                    t-att-aria-label="(isFavorite(app) ? labels.removeFavorite : labels.addFavorite) + ': ' + app.name"
+                    t-att-title="isFavorite(app) ? labels.removeFavorite : labels.addFavorite"
+                    t-on-click.stop="() => this.toggleFavorite(app)">
+                <i t-attf-class="fa {{ isFavorite(app) ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"/>
+            </button>
+        </div>
+    </t>
+</templates>

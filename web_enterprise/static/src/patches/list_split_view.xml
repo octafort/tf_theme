@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Hosted in the Layout (see SplitPaneHost in list_split_view.js). -->
+    <t t-inherit="web.Layout" t-inherit-mode="extension">
+        <xpath expr="//main" position="after">
+            <t t-if="env.cbtSplitHost" t-component="env.cbtSplitHost.cbtSplitPaneHost"/>
+        </xpath>
+    </t>
+
+    <t t-name="web_enterprise.SplitPaneHost">
+        <SplitFormPane t-if="split.resId"
+                       t-key="split.resId"
+                       resModel="host.props.resModel"
+                       resId="split.resId"
+                       resIds="split.resIds"
+                       formViewId="host.cbtFormViewId"
+                       context="host.props.context"
+                       actionId="host.env.config.actionId"
+                       recorder="split.recorder"
+                       onClose="() => host.cbtCloseSplit()"
+                       onExpand="() => host.cbtExpandSplit()"/>
+    </t>
+
+    <t t-name="web_enterprise.SplitFormPane">
+        <section class="cbt-split-pane" t-att-aria-label="labels.title">
+            <div class="cbt-split-pane__header">
+                <span class="cbt-split-pane__title text-truncate" t-esc="labels.title"/>
+                <button type="button" class="cbt-icon-btn" t-att-title="labels.expand" t-att-aria-label="labels.expand" t-on-click="props.onExpand">
+                    <i class="fa fa-expand" aria-hidden="true"/>
+                </button>
+                <button type="button" class="cbt-icon-btn" t-att-title="labels.close" t-att-aria-label="labels.close" t-on-click="props.onClose">
+                    <i class="oi oi-close" aria-hidden="true"/>
+                </button>
+            </div>
+            <div class="cbt-split-pane__body">
+                <View t-props="viewProps"/>
+            </div>
+        </section>
+    </t>
+</templates>

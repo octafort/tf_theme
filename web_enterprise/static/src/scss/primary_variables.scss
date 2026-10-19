@@ -3,31 +3,52 @@
 /// They are available in every asset bundle.
 ///
 
-// Colors
+// Neutral Colors
 $o-white: #FFF !default;
 $o-black: #000 !default;
 
-$o-gray-100: #F9FAFB !default;
-$o-gray-200: #e7e9ed !default;
-$o-gray-300: #d8dadd !default;
-$o-gray-400: #9a9ca5 !default;
-$o-gray-500: #7c7f89 !default;
-$o-gray-600: #5f636f !default;
-$o-gray-700: #374151 !default;
-$o-gray-800: #1F2937 !default;
-$o-gray-900: #111827 !default;
+// $o-gray-100: #F9FAFB !default;
+// $o-gray-200: #e7e9ed !default;
+// $o-gray-300: #d8dadd !default;
+// $o-gray-400: #9a9ca5 !default;
+// $o-gray-500: #7c7f89 !default;
+// $o-gray-600: #5f636f !default;
+// $o-gray-700: #374151 !default;
+// $o-gray-800: #1F2937 !default;
+// $o-gray-900: #111827 !default;
 
-$o-enterprise-color: #714B67 !default;
+$o-gray-100: #f6f7f9 !default;  
+$o-gray-200: #eceef2 !default;
+$o-gray-300: #e1e4ea !default;  
+$o-gray-400: #cdd2db !default;
+$o-gray-500: #a3aab8 !default;  
+$o-gray-600: #6b7385 !default;
+$o-gray-700: #4a5163 !default;  
+$o-gray-800: #2f3442 !default;
+$o-gray-900: #1b1f29 !default;
+
+// $o-enterprise-color: #714B67 !default;
+// $o-enterprise-action-color: #017e84 !default;
+$o-enterprise-color: #4f46e5 !default;
 $o-enterprise-action-color: #017e84 !default;
 
 
-$o-brand-cortex: $o-enterprise-color !default;
-$o-brand-primary: $o-brand-cortex !default;
+$o_brand_cortex: $o-enterprise-color !default;
+$o-brand-primary: $o_brand_cortex !default;
 $o-brand-secondary: #8f8f8f !default;
 $o-brand-lightsecondary: $o-gray-100 !default;
 
 $o-action: $o-enterprise-action-color !default;
 $o-main-link-color: $o-enterprise-action-color !default;
+
+$o-webclient-background-color: #f3f4f7 !default;
+$o-view-background-color: #ffffff !default;
+$o-main-text-color: #262b37 !default;
+
+// Shape
+$o-border-radius: o-to-rem(8px) !default;
+$o-border-radius-sm: o-to-rem(6px) !default;
+$o-border-radius-lg: o-to-rem(12px) !default;
 
 // Components
 $o-component-active-color:  $o-black !default;
@@ -49,6 +70,26 @@ $o-input-border-required: $o-black !default;
 
 // Badges
 $o-badge-min-width: 2.7ch !default !default;
+
+// Theme tokens (read by theme/scss/tokens.scss)
+$cbt-scheme: light !default;
+$cbt-surface: $o-view-background-color !default;
+$cbt-surface-raised: #ffffff !default;
+$cbt-surface-sunken: #f1f3f6 !default;
+$cbt-surface-hover: #f4f5f8 !default;
+$cbt-border: #e3e6ec !default;
+$cbt-border-strong: #d0d5de !default;
+$cbt-text: $o-main-text-color !default;
+$cbt-text-strong: #10131a !default;
+$cbt-text-muted: #687083 !default;
+$cbt-navbar-bg: rgba(255, 255, 255, .86) !default;
+$cbt-overlay: rgba(15, 18, 26, .38) !default;
+$cbt-shadow-sm: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .07) !default;
+$cbt-shadow-md: 0 6px 16px -4px rgba(16, 24, 40, .12), 0 2px 6px -2px rgba(16, 24, 40, .06) !default;
+$cbt-shadow-lg: 0 24px 48px -12px rgba(16, 24, 40, .22) !default;
+$cbt-sidebar-ink-bg: #151826 !default;
+$cbt-sidebar-ink-text: #c9cede !default;
+
 
 // Buttons
 // Map of customized values for each button. If a button's design is defined

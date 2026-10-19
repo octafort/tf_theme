@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web_enterprise.AppIcon">
+        <span t-attf-class="cbt-app-icon cbt-app-icon--{{ props.size }}" aria-hidden="true">
+            <t t-set="fa" t-value="fontIcon"/>
+            <span t-if="fa" class="cbt-app-icon__font" t-attf-style="color: {{ fa.color }}; background: {{ fa.background }};">
+                <i t-attf-class="fa {{ fa.iconClass }}"/>
+            </span>
+            <img t-else="" t-att-src="imageSrc" alt="" loading="lazy" draggable="false"/>
+        </span>
+    </t>
+</templates>

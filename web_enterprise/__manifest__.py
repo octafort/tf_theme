@@ -4,18 +4,20 @@
 {
     'name': 'Web Enterprise',
     'category': 'Hidden',
+    'summary': 'Enterprise web client with the DevsCodespace backend theme integrated',
     'version': '1.0',
     'description': """
-Cortex Enterprise Web Client.
-===========================
-
-This module modifies the web addon to provide Enterprise design and responsiveness.
-        """,
-    'depends': ['web', 'base_setup'],
+Cortex Enterprise Web Client with an integrated, configurable backend theme:
+    sidebar, app drawer, global search, bookmarks, palettes, split view,
+    chatter position and branded login pages. Home Menu and dark mode are kept.
+    """,
+    'depends': ['web','mail', 'base_setup'],
     'auto_install': ['web'],
     'data': [
         'views/webclient_templates.xml',
         'views/res_users_views.xml',
+        'views/login_templates.xml',
+        'data/theme_actions.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [
@@ -29,7 +31,8 @@ This module modifies the web addon to provide Enterprise design and responsivene
             ('before', 'web/static/src/scss/bootstrap_overridden.scss', 'web_enterprise/static/src/scss/bootstrap_overridden.scss'),
         ],
         'web.assets_frontend': [
-            'web_enterprise/static/src/webclient/home_menu/home_menu_background.scss', # used by login page
+            #'web_enterprise/static/src/webclient/home_menu/home_menu_background.scss', # used by login page
+            'web_enterprise/static/src/theme/login/login.scss',
             'web_enterprise/static/src/webclient/navbar/navbar.scss',
         ],
         'web.assets_backend': [
@@ -43,6 +46,13 @@ This module modifies the web addon to provide Enterprise design and responsivene
             'web_enterprise/static/src/views/**/*.js',
             'web_enterprise/static/src/views/**/*.xml',
             ('remove', 'web_enterprise/static/src/views/pivot/**'),
+            
+            # --- theme (after Enterprise SCSS so equal-specificity rules win) ---
+            'web_enterprise/static/src/scss/fonts.scss',
+            'web_enterprise/static/src/scss/tokens.scss',
+            'web_enterprise/static/src/scss/ui/*.scss',
+            'web_enterprise/static/src/components/**/*',
+            'web_enterprise/static/src/patches/**/*',
 
             # Don't include dark mode files in light mode
             ('remove', 'web_enterprise/static/src/**/*.dark.scss'),
@@ -91,6 +101,8 @@ This module modifies the web addon to provide Enterprise design and responsivene
             ('remove', 'web_enterprise/static/tests/**/*.test.js'),
         ],
     },
+    'post_init_hook': 'post_init_hook',
+    'uninstall_hook': 'uninstall_hook',
     'author': 'Cortex S.A.',
     'license': 'OEEL-1',
 }

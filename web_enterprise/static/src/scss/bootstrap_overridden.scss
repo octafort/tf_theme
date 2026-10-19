@@ -18,7 +18,7 @@ $danger: #d44c59 !default;
 // Enable predefined decorative box-shadow styles on various components.
 // Does not affect box-shadows used for focus states.
 
-$enable-shadows: true !default;
+// $enable-shadows: true !default;
 
 // Components
 //
@@ -27,16 +27,16 @@ $enable-shadows: true !default;
 $component-active-color: unset !default;
 $component-active-bg: mix($o-enterprise-action-color, $o-white, 10%) !default;
 
-$nav-tabs-border-radius: 0 !default;
+// $nav-tabs-border-radius: 0 !default;
 $nav-pills-border-radius: 0 !default;
 $card-border-radius: 0 !default;
 $accordion-border-radius: 0 !default;
 $toast-border-radius: 0 !default;
-$badge-border-radius: 0 !default;
+// $badge-border-radius: 0 !default;
 $progress-border-radius: 0 !default;
 $list-group-border-radius: 0 !default;
 $thumbnail-border-radius: 0 !default;
-$form-check-input-border-radius: 0 !default;
+// $form-check-input-border-radius: 0 !default;
 
 // Typography
 //
@@ -52,7 +52,7 @@ $h5-font-size: $o-font-size-base * 1.1 !default;
 //
 // For each of Bootstrap's buttons, define text, background, and border color.
 
-$btn-transition: none !default;
+// $btn-transition: none !default;
 
 $btn-box-shadow: 0 !default;
 $btn-active-box-shadow: 0 !default;

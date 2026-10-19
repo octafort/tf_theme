@@ -3,7 +3,7 @@
 .o_notebook {
     --Notebook__link-border-color: #{$border-color};
     --Notebook__link-border-color--hover: #{$border-color};
-    --Notebook__link-border-top-color--active: #{$o-brand-cortex};
+    --Notebook__link-border-top-color--active: #{$o_brand_cortex};
 
     .modal & {
         --Notebook-padding-x: #{$modal-inner-padding};
@@ -22,7 +22,7 @@
             }
 
             &.active {
-                --#{$prefix}nav-tabs-link-active-color: var(--Notebook__link-color--active, #{$o-brand-cortex});
+                --#{$prefix}nav-tabs-link-active-color: var(--Notebook__link-color--active, #{$o_brand_cortex});
 
                 &::after {
                     position: absolute;

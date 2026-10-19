@@ -6,27 +6,46 @@
 // = Colors
 // ============================================================================
 
-$o-white: #000 !default;
-$o-black: #FFF !default;
+// $o-white: #000 !default;
+// $o-black: #FFF !default;
 
-$o-gray-100: #1B1D26 !default;
-$o-gray-200: #262A36 !default;
-$o-gray-300: #3C3E4B !default;
-$o-gray-400: #5A5E6B !default;
-$o-gray-500: #6B707F !default;
-$o-gray-600: #7E8392 !default;
-$o-gray-700: #B1B3BC !default;
-$o-gray-800: #D1D1D1 !default;
-$o-gray-900: #E4E4E4 !default;
+// $o-gray-100: #1B1D26 !default;
+// $o-gray-200: #262A36 !default;
+// $o-gray-300: #3C3E4B !default;
+// $o-gray-400: #5A5E6B !default;
+// $o-gray-500: #6B707F !default;
+// $o-gray-600: #7E8392 !default;
+// $o-gray-700: #B1B3BC !default;
+// $o-gray-800: #D1D1D1 !default;
+// $o-gray-900: #E4E4E4 !default;
+
+$o-white: #0f1218 !default;
+$o-black: #f3f5fa !default;
+
+$o-gray-100: #161a22 !default;  
+$o-gray-200: #1f2430 !default;
+$o-gray-300: #2b313e !default;  
+$o-gray-400: #3b4251 !default;
+$o-gray-500: #5c6577 !default;  
+$o-gray-600: #8a93a6 !default;
+$o-gray-700: #b2b9c7 !default;  
+$o-gray-800: #d3d8e1 !default;
+$o-gray-900: #e9ecf2 !default;
 
 $o-enterprise-color: #6b3e66 !default;
 $o-brand-primary: $o-enterprise-color !default;
 $o-enterprise-action-color: #02c7b5 !default;
 
-$o-success: #1dc959 !default;
-$o-info: #6AB5FB !default;
-$o-warning: #FBB56A !default;
-$o-danger: #b83232 !default;
+// $o-success: #1dc959 !default;
+// $o-info: #6AB5FB !default;
+// $o-warning: #FBB56A !default;
+// $o-danger: #b83232 !default;
+
+$o-success: #3fb97a !default;  
+$o-info: #38a9c7 !default;
+$o-warning: #f0ad3c !default;  
+$o-danger: #f0626b !default;
+
 $o-action: $o-enterprise-action-color !default;
 $light: $o-gray-300 !default;
 $dark: $o-gray-700 !default;
@@ -34,11 +53,16 @@ $dark: $o-gray-700 !default;
 
 // = Text
 // ============================================================================
+$o-shadow-color: #000000 !default;
 
 $o-main-link-color: $o-action !default;
-$o-enterprise-color: $o-brand-cortex !default;
+$o-enterprise-color: $o_brand_cortex !default;
 $o-main-favorite-color: #ffd532 !default;
 $o-main-code-color: #c58bc8 !default;
+
+$o-main-text-color: #d7dce6 !default;
+$o-main-headings-color: #f3f5fa !default;
+$o-main-color-muted: rgba(#b2b9c7, .76) !default;
 
 // = Fine-tune contextual text colors.
 $o-theme-text-colors: (
@@ -53,7 +77,7 @@ $o-theme-text-colors: (
 // = Webclient
 // ============================================================================
 $o-webclient-color-scheme: dark !default;
-$o-webclient-background-color: $o-gray-100 !default;
+$o-webclient-background-color: #11141b!default;
 $o-view-background-color: $o-gray-200 !default;
 
 // = Inputs
@@ -62,13 +86,30 @@ $o-input-border-required: $o-black !default;
 // = Components
 // ============================================================================
 $o-component-active-bg: mix($o-action, $o-gray-300, 10%) !default;
+$o-component-active-color: #f3f5fa !default;
 $o-form-lightsecondary: $o-gray-300 !default;
 
 // = List-group
-$o-list-group-active-bg: rgba(saturate(adjust-hue($o-info, 15), 1.8), .5) !default;
+// $o-list-group-active-bg: rgba(saturate(adjust-hue($o-info, 15), 1.8), .5) !default;
+$o-list-group-active-color: #f3f5fa !default;
+$o-list-group-active-bg: #262c45 !default;
 
 // = Modal
 $modal-backdrop-bg: $o-white !default;
+
+
+$cbt-surface: #191d26 !default;           $cbt-surface-raised: #1f2430 !default;
+$cbt-surface-sunken: #141820 !default;    $cbt-surface-hover: #222836 !default;
+$cbt-border: #2a303d !default;            $cbt-border-strong: #3a4150 !default;
+$cbt-text: #d7dce6 !default;              $cbt-text-strong: #f3f5fa !default;
+$cbt-text-muted: #8f98ab !default;
+$cbt-navbar-bg: rgba(20, 24, 32, .86) !default;
+$cbt-overlay: rgba(0, 0, 0, .55) !default;
+$cbt-shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.02) !default;
+$cbt-shadow-md: 0 8px 20px -6px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) !default;
+$cbt-shadow-lg: 0 28px 56px -12px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.04) !default;
+$cbt-sidebar-ink-bg: #0c0f15 !default;    $cbt-sidebar-ink-text: #b9bfcd !default;
+
 
 // = Buttons
 $o-btns-bs-override: () !default;

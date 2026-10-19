@@ -6,6 +6,11 @@
         <attribute name="t-ref">nav</attribute>
     </xpath>
     <xpath expr="//t[@t-call='web.NavBar.AppsMenu']" position="replace">
+        <button t-if="cbtShowSidebarToggle" type="button" class="cbt-icon-btn cbt-sidebar-toggle"
+            t-att-title="cbtLabels.sidebar" t-att-aria-label="cbtLabels.sidebar"
+            t-on-click="cbtToggleSidebar">
+        <i class="fa fa-bars" aria-hidden="true"/>
+        </button>
         <a t-if="!isScopedApp" href="/cortex" class="o_menu_toggle border-0" t-att-class="{'hasImage': currentApp?.webIconData}" accesskey="h" t-ref="menuApps" t-on-click.prevent="() => { env.isSmall ? this._openAppMenuSidebar() : this.hm.toggle() }">
             <t t-if="env.isSmall and !hm.hasHomeMenu">
                 <t t-call="web.NavBar.AppsMenu.Sidebar"/>
